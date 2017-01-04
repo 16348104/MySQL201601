@@ -47,3 +47,8 @@ UPDATE test.user SET name = '王二' WHERE id = 5;
 -- CRUD
 
 DELETE FROM test.user WHERE id = 5;
+
+/*
+1. 复习 书 ch1 ch2 ch3
+2. 预习 手册 第11章 列类型
+ */
