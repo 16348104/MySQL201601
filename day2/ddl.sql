@@ -77,6 +77,9 @@ SELECT *
 FROM day2.student;
 -- ORDER BY dob DESC ;
 
+DELETE FROM day2.student;
+TRUNCATE TABLE day2.student; -- dangerous!
+
 DELETE FROM day2.student
 WHERE id = 2;
 DELETE FROM day2.student
@@ -149,4 +152,3 @@ REFERENCES day2.department (id);
 
 ALTER TABLE day2.student
     DROP FOREIGN KEY fk_student_departmentId;
-
