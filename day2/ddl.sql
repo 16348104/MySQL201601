@@ -49,15 +49,16 @@ CREATE TABLE student (
   gender       VARCHAR(255) DEFAULT '男',
   age          INT CHECK (age > 17), -- 检查完整性约束
   dob          DATE UNIQUE,
-  departmentId INT,
-  CONSTRAINT FOREIGN KEY (departmentId) REFERENCES day2.department (id)
-    ON DELETE RESTRICT
-    ON UPDATE NO ACTION -- 级联 cascade 删除  set null 置空
+  departmentId INT
+  #   CONSTRAINT FOREIGN KEY (departmentId) REFERENCES day2.department (id)
+  #     ON DELETE RESTRICT
+  #     ON UPDATE NO ACTION -- 级联 cascade 删除  set null 置空
 );
 
 DROP TABLE day2.student;
 
-ALTER TABLE day2.student AUTO_INCREMENT = 10000;
+ALTER TABLE day2.student
+  AUTO_INCREMENT = 10000;
 
 DESC day2.student;
 
@@ -107,11 +108,45 @@ WHERE id = 2;
 SET FOREIGN_KEY_CHECKS = 0;
 SET FOREIGN_KEY_CHECKS = 1;
 
-ALTER TABLE day2.new_student RENAME day2.student;
+ALTER TABLE day2.new_student
+  RENAME day2.student;
 
-SHOW TABLES ;
+SHOW TABLES;
 
-DESC day2.student;
 
 ALTER TABLE day2.student
-  ADD COLUMN address VARCHAR(255) AFTER gender;
+  ADD COLUMN address VARCHAR(255)
+  AFTER gender;
+
+ALTER TABLE day2.student
+  DROP COLUMN address;
+
+ALTER TABLE day2.student
+  DROP COLUMN city;
+
+ALTER TABLE day2.student
+  MODIFY COLUMN name VARCHAR(20);
+
+ALTER TABLE day2.student
+  MODIFY COLUMN name VARCHAR(20) AFTER age;
+
+ALTER TABLE day2.student
+  ADD CONSTRAINT pk_student_id PRIMARY KEY (id);
+
+ALTER TABLE day2.student
+  MODIFY COLUMN id INT AUTO_INCREMENT;
+
+ALTER TABLE day2.student
+  CHANGE gender sex VARCHAR(255);
+DESC day2.student;
+
+-- ***
+ALTER TABLE day2.student
+  ADD CONSTRAINT
+  fk_student_departmentId -- alias 别名
+FOREIGN KEY (departmentId)
+REFERENCES day2.department (id);
+
+ALTER TABLE day2.student
+    DROP FOREIGN KEY fk_student_departmentId;
+
