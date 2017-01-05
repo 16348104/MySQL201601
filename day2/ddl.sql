@@ -106,3 +106,12 @@ WHERE id = 2;
 
 SET FOREIGN_KEY_CHECKS = 0;
 SET FOREIGN_KEY_CHECKS = 1;
+
+ALTER TABLE day2.new_student RENAME day2.student;
+
+SHOW TABLES ;
+
+DESC day2.student;
+
+ALTER TABLE day2.student
+  ADD COLUMN address VARCHAR(255) AFTER gender;
