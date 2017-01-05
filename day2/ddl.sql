@@ -16,8 +16,11 @@ SHOW TABLES;
 # varchar(255) 可变长字符类型
 
 CREATE TABLE day2.user (
-  id   INT(1),
-  name VARCHAR(255)
+  # AUTO_INCREMENT 自动增长
+  id   INT AUTO_INCREMENT PRIMARY KEY, -- display width 展示宽度 unsigned 无符号（负号） Java int
+  name VARCHAR(255),
+  height DOUBLE(3,2),
+  price DECIMAL(6, 2)
 );
 
 SELECT *
@@ -25,6 +28,6 @@ FROM day2.user; -- 结果集
 
 DROP TABLE day2.user;
 
-INSERT INTO day2.user VALUES (111, 'asdfasdf');
+INSERT INTO day2.user (name, height) VALUES ('zhangsan', 1.75); -- ?
 
 DESC day2.user; -- describe DESC 描述
