@@ -50,6 +50,7 @@ CREATE TABLE student (
   dob          DATE UNIQUE,
   departmentId INT,
   CONSTRAINT FOREIGN KEY (departmentId) REFERENCES day2.department (id)
+    ON DELETE SET NULL -- 级联 cascade 删除  set null 置空
 );
 
 DROP TABLE day2.student;
@@ -60,6 +61,9 @@ INSERT INTO day2.student VALUES (NULL, 'Zhangsan', 18, '1999-1-1', 1); -- null
 INSERT INTO day2.student VALUES (NULL, 'Lisi', 19, '2000-1-1', 2); -- null
 INSERT INTO day2.student VALUES (NULL, 'Wanger', 20, '1997-1-1', 3); -- null
 INSERT INTO day2.student VALUES (NULL, 'tester', 20, '1996-1-1', 4); -- null
+
+DELETE FROM day2.student
+WHERE id = 2;
 
 SELECT *
 FROM day2.student;
@@ -72,7 +76,7 @@ WHERE dob = '1990-1-2';
 
 -- table department entity
 CREATE TABLE day2.department (
-  id    INT AUTO_INCREMENT PRIMARY KEY ,
+  id    INT AUTO_INCREMENT PRIMARY KEY,
   dname VARCHAR(255) NOT NULL,
   tel   VARCHAR(255)
 );
@@ -85,3 +89,6 @@ FROM day2.department;
 INSERT INTO day2.department VALUES (NULL, 'CS', '123');
 INSERT INTO day2.department VALUES (NULL, 'EE', '789');
 INSERT INTO day2.department VALUES (NULL, 'SS', '456');
+
+DELETE FROM day2.department
+WHERE id = 2;
