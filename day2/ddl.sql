@@ -44,23 +44,30 @@ SHOW TABLES;
 
 -- entity
 CREATE TABLE student (
-  id           INT AUTO_INCREMENT PRIMARY KEY, -- 主关键字 主键 主码
+  id           INT          AUTO_INCREMENT PRIMARY KEY, -- 主关键字 主键 主码
   name         VARCHAR(255) NOT NULL,
-  age          INT,
+  gender       VARCHAR(255) DEFAULT '男',
+  age          INT CHECK (age > 17), -- 检查完整性约束
   dob          DATE UNIQUE,
   departmentId INT,
   CONSTRAINT FOREIGN KEY (departmentId) REFERENCES day2.department (id)
-    ON DELETE SET NULL -- 级联 cascade 删除  set null 置空
+    ON DELETE RESTRICT
+    ON UPDATE NO ACTION -- 级联 cascade 删除  set null 置空
 );
 
 DROP TABLE day2.student;
 
+ALTER TABLE day2.student AUTO_INCREMENT = 10000;
+
 DESC day2.student;
 
-INSERT INTO day2.student VALUES (NULL, 'Zhangsan', 18, '1999-1-1', 1); -- null
-INSERT INTO day2.student VALUES (NULL, 'Lisi', 19, '2000-1-1', 2); -- null
-INSERT INTO day2.student VALUES (NULL, 'Wanger', 20, '1997-1-1', 3); -- null
-INSERT INTO day2.student VALUES (NULL, 'tester', 20, '1996-1-1', 4); -- null
+INSERT INTO day2.student VALUES (NULL, 'Zhangsan', NULL, 10, '1999-1-1', 3); -- null
+INSERT INTO day2.student VALUES (NULL, 'Lisi', NULL, 19, '2000-1-1', 3); -- null
+INSERT INTO day2.student VALUES (NULL, 'Wanger', NULL, 20, '1997-1-1', 3); -- null
+INSERT INTO day2.student VALUES (NULL, 'tester', NULL, 20, '1996-1-1', 4); -- null
+
+INSERT INTO day2.student (name, dob, departmentId) VALUES ('new studenet', '1990-1-1', 3);
+
 
 DELETE FROM day2.student
 WHERE id = 2;
@@ -91,4 +98,11 @@ INSERT INTO day2.department VALUES (NULL, 'EE', '789');
 INSERT INTO day2.department VALUES (NULL, 'SS', '456');
 
 DELETE FROM day2.department
+WHERE id = 1;
+
+UPDATE day2.department
+SET id = 4
 WHERE id = 2;
+
+SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS = 1;
