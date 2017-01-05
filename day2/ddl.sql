@@ -72,10 +72,12 @@ WHERE dob = '1990-1-2';
 
 -- table department entity
 CREATE TABLE day2.department (
-  id    INT AUTO_INCREMENT PRIMARY KEY,
+  id    INT AUTO_INCREMENT PRIMARY KEY ,
   dname VARCHAR(255) NOT NULL,
   tel   VARCHAR(255)
 );
+
+DROP TABLE day2.department;
 
 SELECT *
 FROM day2.department;
