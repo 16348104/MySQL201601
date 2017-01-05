@@ -44,9 +44,9 @@ SHOW TABLES;
 
 CREATE TABLE student (
   id         INT AUTO_INCREMENT PRIMARY KEY, -- 主关键字 主键 主码
-  name       VARCHAR(255),
+  name       VARCHAR(255) NOT NULL,
   age        INT,
-  dob        DATE,
+  dob        DATE UNIQUE,
   department VARCHAR(255)
 );
 
@@ -54,7 +54,7 @@ DROP TABLE day2.student;
 
 DESC day2.student;
 
-INSERT INTO day2.student VALUES (NULL, 'zhangsan', 18, '1990-1-1', 'CS');
+INSERT INTO day2.student VALUES (NULL , '', 18, NULL , 'CS'); -- null
 
 UPDATE day2.student
 SET department = 'EE'
@@ -62,3 +62,7 @@ WHERE id = 3;
 
 SELECT *
 FROM day2.student;
+-- ORDER BY dob DESC ;
+
+DELETE FROM day2.student WHERE id = 2;
+DELETE FROM day2.student WHERE dob = '1990-1-2';
