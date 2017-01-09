@@ -76,6 +76,22 @@ SELECT *
 FROM scott.emp
 WHERE JOB = 'salesman' AND DEPTNO = 20;
 
-SELECT ENAME, JOB, COMM
+SELECT
+  ENAME,
+  JOB,
+  COMM
 FROM scott.emp
-ORDER BY 3 ; -- HIREDATE desc; -- DEPTNO DESC, ENAME; -- asc ascend vi.\ 上升；登高；追溯 desc vi.\ 下降；下去；下来；遗传；屈尊
+ORDER BY 3; -- HIREDATE desc; -- DEPTNO DESC, ENAME; -- asc ascend vi.\ 上升；登高；追溯 desc vi.\ 下降；下去；下来；遗传；屈尊
+
+SELECT *
+FROM scott.emp
+LIMIT 10 OFFSET 0; -- 分页查询 limit 限制  offset 偏移量
+
+SELECT *
+FROM scott.emp
+LIMIT 0, 10;
+
+DESC db_student.student;
+
+SELECT *
+FROM db_student.student;
