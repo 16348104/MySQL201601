@@ -75,3 +75,7 @@ WHERE HIREDATE = '1987-7-13';
 SELECT *
 FROM scott.emp
 WHERE JOB = 'salesman' AND DEPTNO = 20;
+
+SELECT ENAME, JOB, COMM
+FROM scott.emp
+ORDER BY 3 ; -- HIREDATE desc; -- DEPTNO DESC, ENAME; -- asc ascend vi.\ 上升；登高；追溯 desc vi.\ 下降；下去；下来；遗传；屈尊
