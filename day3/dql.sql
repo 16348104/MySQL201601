@@ -95,3 +95,5 @@ DESC db_student.student;
 
 SELECT *
 FROM db_student.student;
+
+-- 作业 4, 5, 6, 7, 19, 20, 21
