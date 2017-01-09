@@ -52,7 +52,7 @@ CREATE TABLE db_student.student_course (
 -- FK
 ALTER TABLE db_student.student
   ADD CONSTRAINT
-  fk_student_departmentId
+  fk_student_departmentId -- alias 别名\ [ˈeɪliəs]
 FOREIGN KEY (departmentId)
 REFERENCES db_student.department (id);
 
@@ -68,6 +68,12 @@ ALTER TABLE db_student.student_course
 FOREIGN KEY (courseId)
 REFERENCES db_student.course (id);
 
+-- data
+INSERT INTO db_student.student VALUES (NULL, 'Zhangsan', 18, 'Male', '1999-1-1', NULL);
+INSERT INTO db_student.student (name, age, dob) VALUES ('Lisi', 19, '2000-1-1');
+
+SELECT *
+FROM db_student.student;
 -- ------------------------
 -- 显示表结构
 DESC db_student.student;
