@@ -14,11 +14,7 @@ CREATE TABLE db_student.student (
   dob          DATE COMMENT '出生日期',
   departmentId INT COMMENT 'FK'
 )
-  COMMENT '学生表'; -- ?
-
-DESC db_student.student;
-SHOW FULL COLUMNS FROM db_student.student; -- ?
-SHOW CREATE TABLE db_student.student;
+  COMMENT '学生表';
 
 -- table department
 DROP TABLE IF EXISTS db_student.department;
@@ -42,7 +38,6 @@ CREATE TABLE db_student.course (
 )
   COMMENT '课程表';
 
-
 -- table student_course
 DROP TABLE IF EXISTS db_student.student_course;
 CREATE TABLE db_student.student_course (
@@ -52,4 +47,53 @@ CREATE TABLE db_student.student_course (
   courseId  INT COMMENT 'FK',
   grade     INT COMMENT '成绩'
 )
-  COMMENT '课程表';
+  COMMENT '学生选课表';
+
+-- FK
+ALTER TABLE db_student.student
+  ADD CONSTRAINT
+  fk_student_departmentId
+FOREIGN KEY (departmentId)
+REFERENCES db_student.department (id);
+
+ALTER TABLE db_student.student_course
+  ADD CONSTRAINT
+  fk_student_course_studentId
+FOREIGN KEY (studentId)
+REFERENCES db_student.student (id);
+
+ALTER TABLE db_student.student_course
+  ADD CONSTRAINT
+  fk_student_course_courseId
+FOREIGN KEY (courseId)
+REFERENCES db_student.course (id);
+
+-- ------------------------
+-- 显示表结构
+DESC db_student.student;
+
+-- 显示表中列信息，包括注释
+SHOW FULL COLUMNS FROM db_student.student;
+
+-- 显示建表语句
+SHOW CREATE TABLE db_student.student;
+
+-- 显示库中所有表信息，包括表注释
+SHOW TABLE STATUS FROM db_student;
+
+-- 显示表信息，包括注释
+USE db_student;
+SHOW TABLE STATUS
+WHERE Name = 'student';
+-- ------------------------
+
+/*
+department -> student 1 -> n
+student -> department n -> 1
+
+student -> course 1 -> n
+course -> student 1 -> n
+student <-> course n <-> n
+
+person <-> id card 1 <-> 1
+ */
