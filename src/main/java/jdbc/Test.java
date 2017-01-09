@@ -29,3 +29,15 @@ public class Test {
         connection.close();
     }
 }
+
+/*
+maven.org
+mysql java
+5.1.40
+gradle/grails
+compile 'mysql:mysql-connector-java:5.1.40'
+build.gradle
+
+view - tools windows - gradle
+refresh
+ */
