@@ -61,7 +61,7 @@ ALTER TABLE db_student.student_course
   fk_student_course_studentId
 FOREIGN KEY (studentId)
 REFERENCES db_student.student (id)
-  ON DELETE CASCADE ;
+  ON DELETE CASCADE;
 
 ALTER TABLE db_student.student_course
   ADD CONSTRAINT
@@ -72,6 +72,7 @@ REFERENCES db_student.course (id);
 -- data
 INSERT INTO db_student.student VALUES (NULL, 'Zhangsan', 18, 'Male', '1999-1-1', NULL);
 INSERT INTO db_student.student (name, age, dob) VALUES ('Lisi', 19, '2000-1-1');
+INSERT INTO db_student.student VALUE (NULL, 'Wanger', 20, 'Male', '1990-1-1', 3);
 
 SELECT *
 FROM db_student.student;
