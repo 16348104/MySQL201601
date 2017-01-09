@@ -12,14 +12,19 @@ SHOW CREATE TABLE db_student.student;
 SELECT *
 FROM db_student.student;
 
-SELECT name, gender, dob
+SELECT
+  name,
+  gender,
+  dob
 FROM db_student.student;
 
 SELECT *
 FROM db_student.student
 WHERE id = 1;
 
-SELECT name, dob
+SELECT
+  name,
+  dob
 FROM db_student.student
 WHERE id = 2;
 
@@ -32,8 +37,12 @@ WHERE id = 2;
 
 SELECT *
 FROM db_student.student
-WHERE age = 18 AND gender = 'Male';
+WHERE age = 19 AND gender = 'Male';
 
 SELECT *
 FROM db_student.student
-WHERE age = 18 OR gender = 'Male';
+WHERE age = 19 OR gender = 'Male';
+
+-- =======================================
+-- scott
+SHOW TABLE STATUS FROM scott;
