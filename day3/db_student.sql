@@ -60,7 +60,8 @@ ALTER TABLE db_student.student_course
   ADD CONSTRAINT
   fk_student_course_studentId
 FOREIGN KEY (studentId)
-REFERENCES db_student.student (id);
+REFERENCES db_student.student (id)
+  ON DELETE CASCADE ;
 
 ALTER TABLE db_student.student_course
   ADD CONSTRAINT
@@ -74,6 +75,44 @@ INSERT INTO db_student.student (name, age, dob) VALUES ('Lisi', 19, '2000-1-1');
 
 SELECT *
 FROM db_student.student;
+
+INSERT INTO db_student.department VALUES (NULL, 'CS', '111');
+INSERT INTO db_student.department VALUES (NULL, 'EE', '222');
+INSERT INTO db_student.department VALUES (NULL, 'SS', '333');
+
+SELECT *
+FROM db_student.department;
+
+INSERT INTO db_student.course VALUES (NULL, 'HTML', 1);
+INSERT INTO db_student.course VALUES (NULL, 'Java SE', 3);
+INSERT INTO db_student.course VALUES (NULL, 'MySQL', 2);
+
+SELECT *
+FROM db_student.course;
+
+INSERT INTO db_student.student_course VALUES (NULL, 1, 1, NULL);
+INSERT INTO db_student.student_course VALUES (NULL, 1, 2, NULL);
+INSERT INTO db_student.student_course VALUES (NULL, 2, 1, NULL);
+INSERT INTO db_student.student_course VALUES (NULL, 2, 3, NULL);
+
+SELECT *
+FROM db_student.student_course;
+
+UPDATE db_student.student
+SET departmentId = 1
+WHERE id = 1;
+
+UPDATE db_student.student
+SET departmentId = 2
+WHERE id = 2;
+
+SELECT *
+FROM db_student.student;
+
+# DELETE FROM db_student.student WHERE id = 1;
+
+SELECT *
+FROM db_student.student_course;
 -- ------------------------
 -- 显示表结构
 DESC db_student.student;
