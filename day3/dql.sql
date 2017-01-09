@@ -44,5 +44,34 @@ FROM db_student.student
 WHERE age = 19 OR gender = 'Male';
 
 -- =======================================
--- scott
+-- scott tiger
 SHOW TABLE STATUS FROM scott;
+DESC scott.emp; -- employee dept - department salary grade
+
+SELECT *
+FROM scott.emp;
+
+SELECT *
+FROM scott.dept;
+
+SELECT *
+FROM scott.salgrade;
+
+
+SELECT
+  ENAME,
+  JOB,
+  HIREDATE
+FROM scott.emp
+WHERE ENAME = 'scott';
+
+SELECT DISTINCT JOB
+FROM scott.emp;
+
+SELECT *
+FROM emp
+WHERE HIREDATE = '1987-7-13';
+
+SELECT *
+FROM scott.emp
+WHERE JOB = 'salesman' AND DEPTNO = 20;
