@@ -193,3 +193,18 @@ SELECT
   ENAME,
   SAL + ifnull(COMM, 0)
 FROM scott.emp;
+
+-- ========================== JOIN
+SELECT
+  ENAME,
+  DNAME
+FROM scott.emp, scott.dept; -- 13 * 4 = 52
+-- cross join 交叉连接 笛卡尔积
+
+SELECT
+  DNAME,
+  ENAME
+FROM scott.dept
+  INNER JOIN scott.emp
+    ON emp.DEPTNO = dept.DEPTNO; -- 连接条件
+-- inner join 内连接
