@@ -97,10 +97,20 @@ WHERE EMPNO = 7788;
 SELECT *
 FROM scott.emp;
 
+-- ============ 匹配中文 ===
 SELECT *
 FROM emp
-WHERE ENAME NOT REGEXP '[\u4e00-\u9fbb]'; -- ?
+WHERE hex(ENAME) REGEXP 'e[4-9][0-9a-f]{4}'; -- ?
 
+SELECT *
+FROM emp
+WHERE ENAME NOT REGEXP '[\u0391-\uFFE5]'; -- ?
+
+
+SELECT *
+FROM scott.emp
+WHERE length(ENAME) <> char_length(ENAME);
+-- ============ 匹配中文 ===
 
 SELECT *
 FROM scott.emp;
@@ -151,10 +161,35 @@ FROM scott.emp
 WHERE SAL BETWEEN 1200 AND 1600; -- [number1, number2]
 
 -- alias
-SELECT ENAME '姓名', JOB AS '工作', HIREDATE AS '入职日期'
+SELECT
+  ENAME       '姓名',
+  JOB      AS '工作',
+  HIREDATE AS '入职日期'
 FROM scott.emp;
 
-SELECT e.ENAME, e.JOB, e.HIREDATE, e.DEPTNO
+SELECT
+  e.ENAME,
+  e.JOB,
+  e.HIREDATE,
+  e.DEPTNO
 FROM scott.emp AS e;
 
 DESC scott.emp;
+
+SHOW CREATE TABLE scott.emp;
+
+SELECT *
+FROM scott.emp
+WHERE COMM IS NOT NULL; -- NULL 的判断：is null, is not null
+
+UPDATE scott.emp
+SET COMM = NULL
+WHERE EMPNO = 7844;
+
+SELECT *
+FROM scott.emp;
+
+SELECT
+  ENAME,
+  SAL + ifnull(COMM, 0)
+FROM scott.emp;
