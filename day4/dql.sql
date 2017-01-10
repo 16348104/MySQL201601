@@ -91,7 +91,7 @@ FROM scott.emp
 WHERE ENAME REGEXP '[a-d]';
 
 UPDATE scott.emp
-    SET ENAME = '斯科特'
+SET ENAME = '斯科特'
 WHERE EMPNO = 7788;
 
 SELECT *
@@ -121,7 +121,7 @@ DESC scott.emp;
 
 SELECT *
 FROM scott.emp
-WHERE COMM > 99 AND  comm < 1000;
+WHERE COMM > 99 AND comm < 1000;
 
 SELECT *
 FROM scott.emp
@@ -133,4 +133,28 @@ WHERE ENAME REGEXP '[^a-z]';
 
 SELECT 'hello0' REGEXP '[0-9]';
 
+SELECT *
+FROM scott.emp
+WHERE ENAME NOT LIKE '%a%';
 
+SELECT *
+FROM scott.emp
+WHERE JOB NOT IN ('manager', 'clerk');
+
+SELECT *
+FROM scott.emp
+WHERE JOB = 'manager' OR JOB = 'clerk';
+
+
+SELECT *
+FROM scott.emp
+WHERE SAL BETWEEN 1200 AND 1600; -- [number1, number2]
+
+-- alias
+SELECT ENAME '姓名', JOB AS '工作', HIREDATE AS '入职日期'
+FROM scott.emp;
+
+SELECT e.ENAME, e.JOB, e.HIREDATE, e.DEPTNO
+FROM scott.emp AS e;
+
+DESC scott.emp;
