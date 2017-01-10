@@ -198,13 +198,35 @@ FROM scott.emp;
 SELECT
   ENAME,
   DNAME
-FROM scott.emp, scott.dept; -- 13 * 4 = 52
+FROM scott.emp
+  CROSS JOIN scott.dept; -- 13 * 4 = 52
 -- cross join 交叉连接 笛卡尔积
 
 SELECT
-  DNAME,
-  ENAME
+  ENAME,
+  DNAME
 FROM scott.dept
   INNER JOIN scott.emp
     ON emp.DEPTNO = dept.DEPTNO; -- 连接条件
 -- inner join 内连接
+
+SELECT *
+FROM scott.emp;
+
+SELECT
+  ENAME,
+  DNAME
+FROM scott.emp
+  LEFT OUTER JOIN scott.dept
+    ON emp.DEPTNO = dept.DEPTNO;
+
+SELECT
+  ENAME,
+  DNAME
+FROM scott.emp
+  RIGHT OUTER JOIN scott.dept
+    ON emp.DEPTNO = dept.DEPTNO;
+-- outer join 外联接
+
+SELECT *
+FROM scott.emp;
