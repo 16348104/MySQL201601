@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * 1/9/17 16:04
  */
 // JDBC Java Database Connectivity - Java 语言数据库连接
-public class Test {
+public class InsertTest {
 
     public static void main(String[] args) throws SQLException {
         // 1. 加载数据库驱动
@@ -23,7 +23,7 @@ public class Test {
         String sql = "INSERT INTO db_student.student(name) VALUES ('jdbc...')";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         // 4. 执行 SQL 语句
-        preparedStatement.executeUpdate(); // update 更新
+        preparedStatement.executeUpdate(); // update 更新 DML insert update delete
 
         preparedStatement.close();
         connection.close();

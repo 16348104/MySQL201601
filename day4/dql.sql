@@ -230,3 +230,6 @@ FROM scott.emp
 
 SELECT *
 FROM scott.emp;
+
+SELECT *
+FROM db_student.student;
