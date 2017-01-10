@@ -88,7 +88,7 @@ WHERE ENAME LIKE '%a%' OR emp.ENAME LIKE '%b%';
 
 SELECT *
 FROM scott.emp
-WHERE ENAME REGEXP '[a-z]';
+WHERE ENAME REGEXP '[a-d]';
 
 UPDATE scott.emp
     SET ENAME = '斯科特'
@@ -100,3 +100,37 @@ FROM scott.emp;
 SELECT *
 FROM emp
 WHERE ENAME NOT REGEXP '[\u4e00-\u9fbb]'; -- ?
+
+
+SELECT *
+FROM scott.emp;
+
+SELECT *
+FROM scott.emp
+WHERE ENAME RLIKE '\\.';
+
+UPDATE scott.emp
+SET ENAME = '斯科特.'
+WHERE ENAME = '斯科特';
+
+SELECT *
+FROM scott.emp
+WHERE COMM REGEXP '[0-9]{3}';
+
+DESC scott.emp;
+
+SELECT *
+FROM scott.emp
+WHERE COMM > 99 AND  comm < 1000;
+
+SELECT *
+FROM scott.emp
+WHERE ENAME REGEXP '^a';
+
+SELECT *
+FROM scott.emp
+WHERE ENAME REGEXP '[^a-z]';
+
+SELECT 'hello0' REGEXP '[0-9]';
+
+
