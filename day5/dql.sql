@@ -58,7 +58,9 @@ INSERT INTO scott.temp_emp
 SELECT *
 FROM scott.temp_emp;
 
-CREATE VIEW v_emp
+SHOW TABLES;
+
+CREATE OR REPLACE VIEW scott.v_emp
 AS
   SELECT
     ENAME,
@@ -66,14 +68,23 @@ AS
     HIREDATE,
     SAL
   FROM scott.emp
-  WHERE HIREDATE > '1985-12-31';
+  WHERE HIREDATE > '1985-12-31' AND ENAME RLIKE 'a';
 
 SHOW TABLE STATUS FROM scott;
 
 SELECT *
-FROM scott.v_emp
-WHERE ENAME RLIKE 'a';
+FROM scott.v_emp;
 
+INSERT INTO scott.v_emp VALUES ('zhangsan', 'job...', '1999-1-1', 1000);
+
+
+UPDATE scott.v_emp
+SET SAL = SAL * 0.2;
+
+DELETE FROM scott.v_emp;
+
+SELECT *
+FROM scott.emp;
 
 SHOW TABLE STATUS FROM db_student;
 
@@ -100,3 +111,11 @@ FROM db_student.v_student_credits;
 SELECT *
 FROM db_student.v_student_credits
 WHERE name = 'lisi';
+
+SHOW TABLE STATUS FROM db_student;
+
+UPDATE db_student.v_student_credits
+SET name = 'Zhangsan_new'
+WHERE name = 'Zhangsan';
+
+DELETE FROM db_student.v_student_credits;
