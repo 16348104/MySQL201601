@@ -18,7 +18,7 @@
 --
 -- Current Database: `scott`
 --
-
+DROP DATABASE IF EXISTS scott;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `scott` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `scott`;

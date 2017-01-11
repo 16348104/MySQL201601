@@ -83,19 +83,29 @@ SET SAL = SAL * 0.2;
 
 DELETE FROM scott.v_emp;
 
+SHOW TABLE STATUS FROM scott;
+
+SHOW FULL TABLES FROM scott WHERE table_type = 'view';
+
 SELECT *
 FROM scott.emp;
 
 SHOW TABLE STATUS FROM db_student;
+
+-- ============= DCL
+-- root 根用户
+-- user table view
+# GRANT vt.\ 授予；允许；承认 / REVOKE 撤销\ [rɪ'vəʊk]
 
 
 SELECT *
 FROM db_student.student_course;
 
 
-CREATE VIEW db_student.v_student_credits
+CREATE OR REPLACE VIEW db_student.v_student_credits
 AS
   SELECT
+    s.id,
     s.name,
     sum(c.credit)
   FROM db_student.student s LEFT JOIN db_student.student_course sc
@@ -110,7 +120,7 @@ FROM db_student.v_student_credits;
 
 SELECT *
 FROM db_student.v_student_credits
-WHERE name = 'lisi';
+WHERE id = 1;
 
 SHOW TABLE STATUS FROM db_student;
 

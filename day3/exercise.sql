@@ -79,8 +79,34 @@ WHERE ENAME REGEXP 'a';
 
 # PART II
 # 1. 返回拥有员工的部门名、部门号
+SELECT DISTINCT
+  d.DEPTNO,
+  d.DNAME
+FROM scott.dept d
+  JOIN scott.emp e
+    ON d.DEPTNO = e.DEPTNO;
 # 2. 工资多于 scott 的员工信息
+SELECT *
+FROM scott.emp
+WHERE SAL + ifnull(COMM, 0) > (
+  SELECT SAL + ifnull(COMM, 0)
+  FROM scott.emp
+  WHERE ENAME = 'scott'
+); -- 子查询
+
+SELECT e1.*
+FROM scott.emp e1
+  JOIN scott.emp e2
+    ON e1.SAL + ifnull(e1.COMM, 0) > e2.SAL + ifnull(e2.COMM, 0)
+WHERE e2.ENAME = 'scott'; -- 自联结 推荐
+
 # 3. 返回员工和所属经理的姓名
+SELECT
+  e1.ENAME,
+  e2.ENAME
+FROM scott.emp e1
+  JOIN scott.emp e2
+    ON e1.MGR = e2.EMPNO;
 # 4. 返回雇员的雇佣日期早于其经理雇佣日期的员工及其经理姓名
 # 5. 返回员工姓名及其所在的部门名称
 # 6. 返回从事 clerk 工作的员工姓名和所在部门名称
