@@ -107,9 +107,43 @@ SELECT
 FROM scott.emp e1
   JOIN scott.emp e2
     ON e1.MGR = e2.EMPNO;
+
+SELECT
+  e.ENAME,
+  d.DNAME
+FROM scott.emp e
+  LEFT JOIN scott.dept d
+    ON e.DEPTNO = d.DEPTNO; -- 联合条件
+# WHERE ; -- 行检索
+
+SELECT
+  e.ENAME,
+  d.DNAME
+FROM scott.emp e, scott.dept d
+WHERE e.DEPTNO = d.DEPTNO;
 # 4. 返回雇员的雇佣日期早于其经理雇佣日期的员工及其经理姓名
+SELECT
+  e1.ENAME,
+  e2.ENAME
+FROM scott.emp e1
+  JOIN scott.emp e2
+    ON e1.MGR = e2.EMPNO
+WHERE e1.HIREDATE < e2.HIREDATE;
 # 5. 返回员工姓名及其所在的部门名称
+SELECT
+  e.ENAME,
+  d.DNAME
+FROM scott.emp e
+  LEFT JOIN scott.dept d
+    ON e.DEPTNO = d.DEPTNO;
 # 6. 返回从事 clerk 工作的员工姓名和所在部门名称
+SELECT
+  e.ENAME,
+  d.DNAME
+FROM scott.emp e
+  LEFT JOIN scott.dept d
+    ON e.DEPTNO = d.DEPTNO
+WHERE e.JOB = 'clerk';
 # 7. 返回部门号及其本部门的最低工资
 # 8. 返回销售部 sales 所有员工的姓名
 # 9. 返回工资多于平均工资的员工
