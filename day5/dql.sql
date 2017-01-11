@@ -58,13 +58,45 @@ INSERT INTO scott.temp_emp
 SELECT *
 FROM scott.temp_emp;
 
+CREATE VIEW v_emp
+AS
+  SELECT
+    ENAME,
+    JOB,
+    HIREDATE,
+    SAL
+  FROM scott.emp
+  WHERE HIREDATE > '1985-12-31';
 
-SELECT
-  s.name,
-  sum(c.credit)
-FROM db_student.student s LEFT JOIN db_student.student_course sc
-    ON s.id = sc.studentId
-  LEFT JOIN db_student.course c
-    ON sc.courseId = c.id
-WHERE grade >= 60
-GROUP BY s.id;
+SHOW TABLE STATUS FROM scott;
+
+SELECT *
+FROM scott.v_emp
+WHERE ENAME RLIKE 'a';
+
+
+SHOW TABLE STATUS FROM db_student;
+
+
+SELECT *
+FROM db_student.student_course;
+
+
+CREATE VIEW db_student.v_student_credits
+AS
+  SELECT
+    s.name,
+    sum(c.credit)
+  FROM db_student.student s LEFT JOIN db_student.student_course sc
+      ON s.id = sc.studentId
+    LEFT JOIN db_student.course c
+      ON sc.courseId = c.id
+  WHERE grade >= 60
+  GROUP BY s.id;
+
+SELECT *
+FROM db_student.v_student_credits;
+
+SELECT *
+FROM db_student.v_student_credits
+WHERE name = 'lisi';
