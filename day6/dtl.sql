@@ -67,10 +67,21 @@ SET ENAME = 'A'
 WHERE EMPNO = 1;
 
 SAVEPOINT b;
+
 DELETE FROM scott.emp;
+
+ROLLBACK TO a; -- 事务没结束
 
 
 ROLLBACK;
+
+DELETE FROM scott.emp;
+ROLLBACK;
+
+SET AUTOCOMMIT = 0;
+SHOW VARIABLES LIKE '%autocommit%';
+
+
 
 /*
 Zhangsan             Lisi
