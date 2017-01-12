@@ -34,8 +34,42 @@ COMMIT; -- 提交\ [kə'mɪt] commit 结束一次事务 显示结束
 SELECT *
 FROM scott.emp;
 START TRANSACTION;
-DELETE FROM scott.emp;
+DELETE FROM scott.emp
+WHERE ENAME = 'scott'; -- commit;
+
+-- DDL -- commit;
+
 TRUNCATE TABLE scott.emp; -- 截断\ [trʌŋ'keɪt\;\ 'trʌŋ-]
+ROLLBACK;
+COMMIT;
+
+
+SHOW VARIABLES LIKE '%iso%';
+
+SELECT connection_id();
+
+SELECT @@global.tx_isolation;
+SELECT @@session.tx_isolation;
+SELECT @@tx_isolation;
+
+
+SELECT *
+FROM scott.emp;
+
+START TRANSACTION;
+
+INSERT INTO scott.emp (EMPNO) VALUES (1);
+
+SAVEPOINT a; -- save point 保留点
+
+UPDATE scott.emp
+SET ENAME = 'A'
+WHERE EMPNO = 1;
+
+SAVEPOINT b;
+DELETE FROM scott.emp;
+
+
 ROLLBACK;
 
 /*
@@ -64,5 +98,4 @@ C: 全部完成 commit
 D: 全部不完成 rollback
 1. wrong
 2. wrong
-
  */
