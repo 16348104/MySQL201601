@@ -4,6 +4,7 @@
 
 # DROP USER dcl_user@'localhost';
 
+CREATE DATABASE db_dcl;
 
 SELECT *
 FROM mysql.user;

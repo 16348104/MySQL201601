@@ -82,12 +82,10 @@ SET AUTOCOMMIT = 0;
 SHOW VARIABLES LIKE '%autocommit%';
 
 
-
 /*
 Zhangsan             Lisi
 1500                 0
 500                  1000
-
 
 一次事务
 DML insert update delete
