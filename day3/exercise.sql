@@ -52,9 +52,11 @@ SELECT *
 FROM scott.emp
 # WHERE ENAME REGEXP '^[abs]';
 # WHERE ENAME LIKE 'a%' OR emp.ENAME LIKE 'b%';
-WHERE substr(ENAME, 1, 1) IN ('a','b','s');
+WHERE substr(ENAME, 1, 1) IN ('a', 'b', 's');
 
-SELECT ENAME, substr(ENAME, 1 , 1)
+SELECT
+  ENAME,
+  substr(ENAME, 1, 1)
 FROM scott.emp;
 # 12. 找到名字长度为 4 个字符的员工信息
 SELECT *
@@ -87,19 +89,71 @@ SELECT *
 FROM scott.emp
 ORDER BY JOB DESC, (SAL + ifnull(COMM, 0));
 # 20. 返回员工的姓名、雇佣年份和月份，并按月份和雇佣日期排序
+SELECT
+  ENAME,
+  year(HIREDATE),
+  month(HIREDATE),
+  day(HIREDATE)
+FROM scott.emp
+ORDER BY 3, day(HIREDATE);
 # 21. 计算员工的日薪，每月按 30 天
 SELECT
   ENAME,
   round((SAL + ifnull(COMM, 0)) / 30, 2)
 FROM scott.emp;
 # 22. 找出 2 月份雇佣的员工
+SELECT *
+FROM scott.emp
+WHERE month(HIREDATE) = 2;
 # 23. 至今为止，员工被雇佣的天数
+SELECT
+  hiredate,
+  datediff(now(), HIREDATE)
+FROM scott.emp;
 # 24. 找出姓名中包含 A 的员工信息
 SELECT *
 FROM scott.emp
 WHERE ENAME REGEXP 'a';
 # 25. 计算出员工被雇佣了多少年、多少月、多少日
+UPDATE scott.emp
+SET HIREDATE = '2016-12-1'
+WHERE ENAME = '斯科特';
 
+SELECT
+  ename,
+  HIREDATE,
+  TIMESTAMPDIFF(
+      YEAR,
+      hiredate,
+      CURDATE()
+  ) AS years,
+  TIMESTAMPDIFF(
+      MONTH,
+      DATE_ADD(
+          hiredate,
+          INTERVAL TIMESTAMPDIFF(YEAR, hiredate, CURDATE()) YEAR
+      ),
+      CURDATE()
+  ) AS months,
+  TIMESTAMPDIFF(
+      DAY,
+      DATE_ADD(
+          DATE_ADD(
+              hiredate,
+              INTERVAL TIMESTAMPDIFF(YEAR, hiredate, CURDATE()
+              ) YEAR),
+          INTERVAL TIMESTAMPDIFF(
+              MONTH,
+              DATE_ADD(
+                  hiredate,
+                  INTERVAL TIMESTAMPDIFF(YEAR, hiredate, CURDATE()) YEAR
+              ),
+              CURDATE()
+          ) MONTH
+      ),
+      CURDATE()
+  ) AS days
+FROM scott.emp;
 # PART II
 # 1. 返回拥有员工的部门名、部门号
 SELECT DISTINCT
@@ -168,7 +222,11 @@ FROM scott.emp e
     ON e.DEPTNO = d.DEPTNO
 WHERE e.JOB = 'clerk';
 # 7. 返回部门号及其本部门的最低工资
-
+SELECT
+  DEPTNO,
+  min(SAL + ifnull(COMM, 0))
+FROM scott.emp
+GROUP BY DEPTNO;
 # 8. 返回销售部 sales 所有员工的姓名
 SELECT ENAME
 FROM scott.emp
@@ -184,7 +242,12 @@ FROM scott.emp e
     ON e.DEPTNO = d.DEPTNO
 WHERE d.DNAME = 'sales';
 # 9. 返回工资多于平均工资的员工
-
+SELECT *
+FROM scott.emp
+WHERE sal + ifnull(COMM, 0) > (
+  SELECT avg(sal + ifnull(COMM, 0))
+  FROM scott.emp
+);
 # 10. 返回与 scott 从事相同工作的员工
 SELECT e1.*
 FROM scott.emp e1
@@ -193,11 +256,32 @@ FROM scott.emp e1
 WHERE e2.ENAME = 'scott';
 
 # 11. 返回比 30 部门员工平均工资高的员工姓名与工资
-
+SELECT
+  ENAME,
+  sal + ifnull(COMM, 0)
+FROM scott.emp
+WHERE sal + ifnull(COMM, 0) > (
+  SELECT avg(sal + ifnull(COMM, 0))
+  FROM scott.emp
+  WHERE DEPTNO = 30
+);
 # 12. 返回工资高于30部门所有员工工资水平的员工信息
-
+SELECT *
+FROM scott.emp
+WHERE sal + ifnull(COMM, 0) > (
+  SELECT max(sal + ifnull(COMM, 0))
+  FROM scott.emp
+  WHERE DEPTNO = 30
+);
 # 13. 返回部门号、部门名、部门所在位置及其每个部门的员工总数
-
+SELECT
+  d.DEPTNO,
+  d.DNAME,
+  d.LOC,
+  count(e.EMPNO) -- count(*)?
+FROM scott.emp e RIGHT JOIN scott.dept d
+    ON e.DEPTNO = d.DEPTNO
+GROUP BY d.DEPTNO;
 # 14. 返回员工的姓名、所在部门名及其工资
 SELECT
   e.ENAME,
@@ -221,9 +305,18 @@ FROM scott.emp e
   JOIN scott.dept d
     ON e.DEPTNO = d.DEPTNO;
 # 17. 返回员工工作及其从事此工作的最低工资
-
+SELECT
+  JOB,
+  min(SAL + ifnull(COMM, 0))
+FROM scott.emp
+GROUP BY JOB;
 # 18. 返回不同部门经理的最低工资
-
+SELECT
+  DEPTNO,
+  min(sal + ifnull(COMM, 0))
+FROM scott.emp
+WHERE JOB = 'manager'
+GROUP BY DEPTNO;
 # 19. 计算出员工的年薪，并且以年薪排序
 SELECT (SAL + ifnull(COMM, 0)) * 12 年薪
 FROM scott.emp
