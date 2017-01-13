@@ -40,17 +40,40 @@ SELECT *
 FROM scott.emp
 WHERE COMM < 100 OR COMM IS NULL;
 # 9. 查找员工雇佣日期是当月的最后一天的员工信息
+SELECT *
+FROM scott.emp
+WHERE HIREDATE = last_day(HIREDATE);
 # 10. 检索出雇佣年限超过 35 年的员工信息
+SELECT *
+FROM scott.emp
+WHERE date_add(HIREDATE, INTERVAL 35 YEAR) < current_date;
 # 11. 找出姓名以 A、B、S 开始的员工信息
+SELECT *
+FROM scott.emp
+# WHERE ENAME REGEXP '^[abs]';
+# WHERE ENAME LIKE 'a%' OR emp.ENAME LIKE 'b%';
+WHERE substr(ENAME, 1, 1) IN ('a','b','s');
+
+SELECT ENAME, substr(ENAME, 1 , 1)
+FROM scott.emp;
 # 12. 找到名字长度为 4 个字符的员工信息
+SELECT *
+FROM scott.emp
+WHERE length(ENAME) = 4;
 # 13. 名字中不包含 R 字符的员工信息
 SELECT *
 FROM scott.emp
 # WHERE ENAME NOT LIKE '%r%';
 WHERE ENAME REGEXP '[^r]'; -- ?
 # 14. 找出员工名字的前3个字符
+SELECT substr(ENAME, 1, 3)
+FROM scott.emp;
 # 15. 将名字中 A 改为 a
+SELECT replace(ENAME, 'A', 'a')
+FROM scott.emp;
 # 16. 将员工的雇佣日期拖后 10 年
+SELECT date_add(HIREDATE, INTERVAL 10 YEAR)
+FROM scott.emp;
 # 17. 返回员工的详细信息并按姓名排序
 SELECT *
 FROM scott.emp
