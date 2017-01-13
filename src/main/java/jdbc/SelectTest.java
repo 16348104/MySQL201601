@@ -28,7 +28,6 @@ public class SelectTest {
                         System.out.println(emp);
                     }
                 }
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
