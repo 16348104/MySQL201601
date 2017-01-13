@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * 1/9/17 16:04
  */
 // JDBC Java Database Connectivity - Java 语言数据库连接
-public class InsertTest {
+public class InsertTest { // iconv -f GBK -t UTF-8 IP.txt > new_ip.txt
 
     public static void main(String[] args) throws SQLException {
         // 1. 加载数据库驱动
