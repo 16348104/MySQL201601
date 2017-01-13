@@ -19,3 +19,7 @@ FROM db_ip.ip;
 
 SELECT *
 FROM db_ip.ip;
+
+SET AUTOCOMMIT = 0;
+
+SHOW VARIABLES LIKE '%autocommit%';

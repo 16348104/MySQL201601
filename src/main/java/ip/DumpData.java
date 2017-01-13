@@ -25,14 +25,16 @@ public class DumpData {
         new Driver();
         Connection connection = DriverManager.getConnection(URL);
         connection.setAutoCommit(false);
+        System.out.println(connection.getAutoCommit());
         PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
         long start = System.currentTimeMillis();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                String min = line.split("\\s+")[0];
-                String max = line.split("\\s+")[1];
+                String[] strings = line.split("\\s+");
+                String min = strings[0];
+                String max = strings[1];
                 String geo = line.replace(min, "").replace(max, "").trim();
                 try {
                     preparedStatement.setString(1, min);
