@@ -6,6 +6,8 @@ import java.util.Scanner;
  * Created by mingfei.net@gmail.com
  * 1/13/17 16:27
  */
+
+// MySQL IP Function
 public class IP {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
