@@ -23,3 +23,8 @@ FROM db_ip.ip;
 SET AUTOCOMMIT = 0;
 
 SHOW VARIABLES LIKE '%autocommit%';
+
+# 0.0.0.0 - 255.255.255.255
+# 166.111.222.0
+
+SELECT * FROM db_ip.ip WHERE inet_aton('59.66.101.202') BETWEEN inet_aton(min) AND inet_aton(max);

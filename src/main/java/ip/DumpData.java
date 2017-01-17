@@ -35,7 +35,7 @@ public class DumpData {
                 String[] strings = line.split("\\s+");
                 String min = strings[0];
                 String max = strings[1];
-                String geo = line.replace(min, "").replace(max, "").trim();
+                String geo = line.replaceFirst(min, "").replaceFirst(max, "").trim();
                 try {
                     preparedStatement.setString(1, min);
                     preparedStatement.setString(2, max);
