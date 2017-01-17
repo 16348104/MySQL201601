@@ -51,15 +51,26 @@ WHERE studentId = 2 AND courseId = 3; -- WHERE id = xxx;
 
 
 -- ------------------------ table student  冗余 多余
--- id  姓名 性别 年龄 籍贯 系别 系电话 系主任
--- 1    a   m     1   bj  cs  123   tester
--- 2    b   m     1   sh  cs  123   tester
--- 3    c   f     1   bj  cs  123   tester
--- 4    d   m     1   gz  cs  123   tester
--- 5    e   f     1   bj  cs  123   tester
--- 6    f   m     1   sz  cs  123   tester
--- 7    a   f     1   bj  cs  123   tester
+-- id  姓名 性别 年龄 籍贯 departmentId (FK)
+-- 1    a   m     1   bj 1
+-- 2    b   m     1   sh 1
+-- 3    c   f     1   bj 1
+-- 4    d   m     1   gz 1
+-- 5    e   f     1   bj 1
+-- 6    f   m     1   sz 1
+-- 7    a   f     1   bj 1
+
+# https://mingfei.gitbooks.io/java-back-end-training-lectures/content/
 
 /*
+create table db_student.department
+id 系别 电话 主任
+1  CS   123 tester1
+2  EE   456 tester2
+...
+
+
 UPDATE db_student.student
 SET dept_minister = 'new_test';
+
+*/
