@@ -27,4 +27,10 @@ SHOW VARIABLES LIKE '%autocommit%';
 # 0.0.0.0 - 255.255.255.255
 # 166.111.222.0
 
-SELECT * FROM db_ip.ip WHERE inet_aton('59.66.101.202') BETWEEN inet_aton(min) AND inet_aton(max);
+SELECT *
+FROM db_ip.ip
+WHERE inet_aton('59.66.101.202') BETWEEN inet_aton(min) AND inet_aton(max);
+
+LOAD DATA LOCAL INFILE '/Users/mingfei/IdeaProjects/MySQL201601/day7/ip.txt'
+INTO TABLE db_ip.ip
+FIELDS TERMINATED BY '|';
